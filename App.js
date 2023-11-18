@@ -9,6 +9,7 @@ import Registration from './Screen/Registration';
 import DrawerPanel from './Screen/DrawerPanel';
 import ChoosePhoto from "./Screen/ChoosePhoto";
 import DetailsScreen from "./Screen/DetailsScreen";
+import NoticeAll from "./Screen/NoticeAll";
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,11 @@ function App() {
                 <Stack.Screen
                     name="DetailsScreen"
                     component={DetailsScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="NoticeAll"
+                    component={NoticeAll}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>

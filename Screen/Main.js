@@ -32,7 +32,7 @@ function Main({navigation}) {
                 <Animated.Text style={[styles.description, {opacity: fadeAnim}]}>
                     Znajdź najlepsze oferty samochodów w jednym miejscu!
                 </Animated.Text>
-                <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Offer')}>
+                <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('NoticeAll')}>
                     <Text style={styles.buttonTextPrimary}>Zobacz ogłoszenia</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Login')}>

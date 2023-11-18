@@ -1,11 +1,0 @@
-
-Jjavascript:S1128")Remove this unused import of 'TextInput'.(Æ±çŠúÿÿÿÿ
-Kjavascript:S1128"*Remove this unused import of 'ScrollView'.(Æ±çŠúÿÿÿÿ
-Tjavascript:S1128"3Remove this unused import of 'NavigationContainer'.(˜Ö¥»øÿÿÿÿ
-Vjavascript:S1128":Remove this unused import of 'createNativeStackNavigator'.(Ö¨°
-Njavascript:S1128"2Remove this unused import of 'withSafeAreaInsets'.(öÙçË
-Ljavascript:S3863	"0'@react-navigation/native' import is duplicated.(ã‘ğÉ
-Xjavascript:S1481"7Remove the declaration of the unused 'oferty' variable.(³êÌŒúÿÿÿÿ
-Ujavascript:S1854"4Remove this useless assignment to variable "oferty".(³êÌŒúÿÿÿÿ
-Vjavascript:S1481"5Remove the declaration of the unused 'cars' variable.(š³¬—ùÿÿÿÿ
-Sjavascript:S1854"2Remove this useless assignment to variable "cars".(š³¬—ùÿÿÿÿ
