@@ -3,13 +3,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import Main from './Screen/Main';
-import Offer from './Screen/Offer';
 import Login from './Screen/Login';
 import Registration from './Screen/Registration';
 import DrawerPanel from './Screen/DrawerPanel';
 import ChoosePhoto from "./Screen/ChoosePhoto";
 import DetailsScreen from "./Screen/DetailsScreen";
 import NoticeAll from "./Screen/NoticeAll";
+import Notice from "./Screen/Notice";
 
 const Stack = createStackNavigator();
 
@@ -20,11 +20,6 @@ function App() {
                 <Stack.Screen
                     name="Main"
                     component={Main}
-                    options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="Offer"
-                    component={Offer}
                     options={{headerShown: false}}
                 />
                 <Stack.Screen
@@ -55,6 +50,11 @@ function App() {
                 <Stack.Screen
                     name="NoticeAll"
                     component={NoticeAll}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Notice"
+                    component={Notice}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>

@@ -1,106 +1,86 @@
 import * as React from 'react';
-import {  View, Text, TextInput, StyleSheet, Pressable, ScrollView, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
-import { useState, useEffect } from 'react';
-import { firebase } from '../firebase-config';
-import { FlatList } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import {View, Text, StyleSheet, Pressable, ScrollView, Image} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
+import {useRoute} from '@react-navigation/native';
+import {useEffect} from "react";
 
 const Notice = ({navigation}) => {
-  const [oferty , setOferty] = useState([]);
-  const offersRef = firebase.firestore().collection('offers');
+    const route = useRoute();
+    const items = route.params.cars;
 
-  const route = useRoute();
-  const cars = route.params.cars;
+    useEffect(() => {
+    }, [items]);
 
-  const handleSnapshot = (querySnapshot) => {
-    const oferty = [];
-    querySnapshot.forEach((doc) => {
-      const {
-        marka,
-        miejscowosc,
-        model,
-        paliwo,
-        przebieg,
-        rok,
-        wojewodztwo,
-        cena,
-      } = doc.data();
-      oferty.push({
-        id: doc.id,
-        marka,
-        miejscowosc,
-        model,
-        paliwo,
-        przebieg,
-        rok,
-        wojewodztwo,
-        cena,
-      });
-    });
-    setOferty(oferty);
-  };
+    return (
 
-  useEffect(() => {
-    offersRef.onSnapshot(handleSnapshot);
-    return () => {
-      offersRef.off(handleSnapshot);
-    };
-  }, []);
+        <View>
+            <FlatList
+                style={{height: '100%'}}
+                data={items}
+                numColumns={1}
+                renderItem={({item, index}) => (
+                    <Pressable onPress={() => navigation.navigate('DetailsScreen', {dataFromParent: item})}>
+                        <View style={[styles.container]}>
+                            <Image style={styles.image} source={{uri: item.url}}/>
+                            <View style={styles.textContainer}>
+                                <View style={styles.textColumn}>
+                                    <Text style={styles.title}>{item.opis}</Text>
+                                    <Text
+                                        style={styles.subtitle}>Rok: {item.rok} Przebieg: {item.przebieg} Paliwo: {item.paliwo}</Text>
+                                    <Text style={styles.subtitlePrize}>Cena: {item.cena}</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </Pressable>
+                )}
+            />
+        </View>
 
-  return (
-    <Pressable onPress={() => navigation.navigate('DetailsScreen')}>
-    <View>
-      <FlatList
-        style={{height: '100%'}}
-        data={route.params.cars}
-        numColumns={1}
-        renderItem={({item})=>(
-          <View style={[styles.container, styles.elevation]}>
-            <Image style={styles.photo} source={require('../assets/samochod.png')}/>
-            <View style={{flexDirection: 'column'}}>
-              <Text style={styles.detail}>Cena: {item.cena}</Text>
-              <Text style={styles.detail}>Marka: {item.marka}</Text>
-              <Text style={styles.detail}>Model: {item.model}</Text>
-              <Text style={styles.detail}>Rodzaj paliwa: {item.paliwo}</Text>
-              <Text style={styles.detail}>Przebieg: {item.przebieg}</Text>
-              <Text style={styles.detail}>Rok produkcji: {item.rok}</Text>
-            </View>
-          </View>
-        )}
-
-        />
-    </View>
-    </Pressable>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
-  container:{
-   margin: 15,
-    marginTop: 20,
-    borderRadius: 20,
-    padding: 15,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-  },
-  elevation: {
-    elevation: 10,
-    shadowColor: '#52006A',
-  },
-  detail:{
-    fontSize: 15,
-    marginLeft: 20,
-    marginTop: 10
-  },
-  photo: {
-    borderRadius: 20,
-    alignSelf : 'center',
-    width: '50%',
-    height: 100
-  },
+    container: {
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        elevation: 5,
+        shadowColor: '#000000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        margin: 10,
+        overflow: 'hidden',
+    },
+    image: {
+        width: '100%',
+        height: 300,
+        resizeMode: 'cover',
+    },
+    textContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+    },
+    textColumn: {
+        flex: 1,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    subtitle: {
+        fontSize: 16,
+        color: '#888888',
+    },
+    subtitlePrize: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#CC0033',
+    }
 });
 
 export default Notice;
