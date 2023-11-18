@@ -11,8 +11,8 @@ function DetailsScreen({navigation}) {
     }, [item]);
 
     return (
-        <View>
-            <ScrollView style={{height: '100%', paddingTop: 50}}>
+        <View style={{paddingTop: 50}}>
+            <ScrollView style={{height: '100%'}}>
 
                 <View>
                     <View style={[styles.container]}>

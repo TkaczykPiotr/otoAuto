@@ -67,7 +67,7 @@ const NoticeAll = ({navigation}) => {
 
     return (
 
-            <View>
+            <View style={{paddingTop: 20}}>
                 <FlatList
                     style={{height: '100%'}}
                     data={oferty}

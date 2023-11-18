@@ -13,7 +13,7 @@ const Notice = ({navigation}) => {
 
     return (
 
-        <View>
+        <View style={{paddingTop: 25}}>
             <FlatList
                 style={{height: '100%'}}
                 data={items}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 2,
         margin: 10,
-        overflow: 'hidden',
+        overflow: 'hidden'
     },
     image: {
         width: '100%',

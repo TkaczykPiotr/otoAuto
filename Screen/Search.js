@@ -166,6 +166,9 @@ function Search({navigation}) {
             }}>
                 <Text style={styles.buttonTextPrimary}>Wyszukaj</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => {navigation.goBack()}}>
+                <Text style={styles.buttonTextPrimary}>Powrót</Text>
+            </TouchableOpacity>
         </View>
     );
 

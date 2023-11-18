@@ -13,8 +13,6 @@ W
 B
 firebase-config.js,8\4\84fdb036621712978dd86ee1e0de71e9510f707c
 A
-Screen/Account.js,b\8\b8ae57cc444ee1c1deffeef20adf3f51eea0c4d0
-A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 8
 app.json,6\5\65596286f14dbaba6a5081a2edaae69700cc3c3b

@@ -10,6 +10,8 @@ import ChoosePhoto from "./Screen/ChoosePhoto";
 import DetailsScreen from "./Screen/DetailsScreen";
 import NoticeAll from "./Screen/NoticeAll";
 import Notice from "./Screen/Notice";
+import Account from "./Screen/Account";
+import Search from "./Screen/Search";
 
 const Stack = createStackNavigator();
 
@@ -55,6 +57,16 @@ function App() {
                 <Stack.Screen
                     name="Notice"
                     component={Notice}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Account"
+                    component={Account}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Search"
+                    component={Search}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>

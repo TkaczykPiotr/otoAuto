@@ -44,7 +44,6 @@ function Add_Off({navigation}) {
                 console.log('Brak rekordów w kolekcji');
             }
         }
-
         getLastItem().then(r => 'pobrano dane z offers')
     }, []);
     const handleBrandChange = (brand) => {
@@ -75,6 +74,7 @@ function Add_Off({navigation}) {
                 url: url
             });
             console.log("document saved correctly", docRef.id);
+            navigation.navigate('NoticeAll');
         } catch (e) {
             console.log(e);
         }

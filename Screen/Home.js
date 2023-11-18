@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -19,92 +19,40 @@ function Home({navigation}) {
     };
 
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: "30%"}}>
-            <Pressable onPress={() => navigation.navigate('Wyszukiwarka')}>
-                <Text style={styles.log}>Wyszukiwarka</Text>
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate('Moje ogłoszenia')}>
-                <Text style={styles.log}>Moje ogłoszenia</Text>
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate('Ogłoszenia')}>
-                <Text style={styles.log}>Lista ogłoszeń</Text>
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate('Dodaj ogłoszenie')}>
-                <Text style={styles.logao}>Dodaj ogłoszenie</Text>
-            </Pressable>
-            <View style={{flex: 1, marginLeft: "55%", marginTop: "30%"}}>
-                <Pressable onPress={() => {
-                    handleSignout().then(r => navigation.navigate('Login'));
-                }}>
-                    <Text style={styles.logao}>Wyloguj </Text>
-                </Pressable>
-            </View>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('NoticeAll')}>
+                <Text style={styles.buttonTextPrimary}>Ogloszenia</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Search')}>
+                <Text style={styles.buttonTextPrimary}>Wyszukaj</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.buttonTextPrimary}>Moje ogłoszenia</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Account')}>
+                <Text style={styles.buttonTextPrimary}>Moje konto</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => handleSignout().then(r => navigation.navigate('Login'))}>
+                <Text style={styles.buttonTextPrimary}>Wyloguj</Text>
+            </TouchableOpacity>
         </View>
 
     );
 }
 
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        borderRadius: 30,
+    buttonPrimary: {
+        backgroundColor: '#2F2F4F',
+        padding: 15,
+        borderRadius: 50,
+        marginBottom: 10,
         width: 200,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+        alignItems: 'center',
     },
-    log: {
-        height: 50,
-        borderRadius: 30,
-        width: 150,
-        margin: 12,
-        padding: 10,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        backgroundColor: '#37EB2B',
-    },
-    logm: {
-        height: 50,
-        borderRadius: 30,
-        width: 200,
-        margin: 12,
-        padding: 10,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        backgroundColor: '#FFFFFF',
-    },
-    reg: {
-        height: 40,
-        borderRadius: 30,
-        width: 100,
-        margin: 12,
-        padding: 10,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        backgroundColor: '#81FF78',
-    },
-    image: {
-        flex: 1,
-        justifyContent: "center"
-    },
-    button: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    tekstNaglowki: {
-        fontSize: 20,
-        fontWeight: "bold"
-    },
-    logao: {
-        height: 50,
-        borderRadius: 30,
-        width: 150,
-        margin: 12,
-        padding: 10,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        backgroundColor: '#37EB2B',
+    buttonTextPrimary: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
 });
 
