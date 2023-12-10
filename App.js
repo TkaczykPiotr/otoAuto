@@ -12,6 +12,8 @@ import NoticeAll from "./Screen/NoticeAll";
 import Notice from "./Screen/Notice";
 import Account from "./Screen/Account";
 import Search from "./Screen/Search";
+import MyNotice from "./Screen/MyNotice";
+import MyDetailsScreen from "./Screen/MyDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -67,6 +69,16 @@ function App() {
                 <Stack.Screen
                     name="Search"
                     component={Search}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="MyNotice"
+                    component={MyNotice}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="MyDetailsScreen"
+                    component={MyDetailsScreen}
                     options={{headerShown: false}}
                 />
             </Stack.Navigator>

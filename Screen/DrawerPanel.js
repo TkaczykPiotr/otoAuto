@@ -7,6 +7,7 @@ import Account from './Account';;
 import NoticeAll from './NoticeAll';
 import Add_Off from './Add_Off';
 import Search from "./Search";
+import MyNotice from "./MyNotice";
 
 const Drawer = createDrawerNavigator();
 
@@ -17,6 +18,7 @@ function DrawerPanel() {
             <Drawer.Screen name="Konto" component={Account}/>
             <Drawer.Screen name="Wyszukaj" component={Search}/>
             <Drawer.Screen name="Ogłoszenia" component={NoticeAll}/>
+            <Drawer.Screen name="Moje ogłoszenia" component={MyNotice}/>
             <Drawer.Screen name='Dodaj Samochod' component={Add_Off}/>
         </Drawer.Navigator>
     );

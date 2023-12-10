@@ -6,7 +6,7 @@ import {
     SafeAreaView,
     StyleSheet,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity, Alert
 } from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
 import {Picker} from '@react-native-picker/picker';
@@ -27,9 +27,11 @@ function Add_Off({navigation}) {
     const [numer, setNumer] = useState();
     const [opis, setOpis] = useState();
     const [models, setModels] = useState([]);
-    const [idUser, setIdUser] = useState(auth.currentUser.uid)
-    const [idOffer, setIdOffer] = useState()
-    const [url, setUrl] = useState('')
+    const [idUser, setIdUser] = useState(auth.currentUser.uid);
+    const [idOffer, setIdOffer] = useState();
+    const [url, setUrl] = useState('');
+    const [errorRok, setErrorRok] = useState('');
+    const [errorNumer, setErrorNumer] = useState('');
 
     useEffect(() => {
         const getLastItem = async () => {
@@ -52,33 +54,81 @@ function Add_Off({navigation}) {
         setModel('');
     };
 
+    const handleInputChangeRok = (text) => {
+        if (/^\d{4}$/.test(text)) {
+            setRok(text);
+            setErrorRok('');
+        } else {
+            setRok(text);
+            setErrorRok('Wprowadź poprawną datę.');
+        }
+    };
+
+    const handleInputChangeNumer = (text) => {
+        if (/^\d{9}$/.test(text)) {
+            setNumer(text);
+            setErrorNumer('');
+        } else {
+            setNumer(text);
+            setErrorNumer('Wprowadź poprawny numer telefonu');
+        }
+    };
+
     const handleDataFromPhoto = (data) => {
         setUrl(data);
     }
 
     async function add() {
+        console.log(opis);
         try {
-            const docRef = await addDoc(collection(db, "offers"), {
-                id: idOffer,
-                idUser: idUser,
-                opis: opis,
-                wojewodztwo: wojewodztwo,
-                marka: marka,
-                paliwo: paliwo,
-                cena: parseInt(cena),
-                przebieg: parseInt(przebieg),
-                miejscowosc: miejscowosc,
-                rok: parseInt(rok),
-                model: model,
-                numer: numer,
-                url: url
-            });
-            console.log("document saved correctly", docRef.id);
-            navigation.navigate('NoticeAll');
+            if (!opis || !wojewodztwo || !marka || !paliwo || !cena || !przebieg || !miejscowosc || !rok || !model || !numer) {
+                Alert.alert('Błąd', 'Nie podano wszystkich informacji.');
+            } else {
+                const docRef = await addDoc(collection(db, "offers"), {
+                    idOffer: idOffer,
+                    idUser: idUser,
+                    opis: opis,
+                    wojewodztwo: wojewodztwo,
+                    marka: marka,
+                    paliwo: paliwo,
+                    cena: parseInt(cena),
+                    przebieg: parseInt(przebieg),
+                    miejscowosc: miejscowosc,
+                    rok: parseInt(rok),
+                    model: model,
+                    numer: numer,
+                    url: url
+                });
+                console.log("document saved correctly", docRef.id);
+                clear();
+                navigation.navigate('NoticeAll');
+            }
         } catch (e) {
             console.log(e);
         }
     }
+
+    const back = () => {
+        clear();
+        navigation.goBack();
+    }
+
+    const clear = () => {
+        setMarka(null);
+        setModel(null);
+        setCena(null);
+        setNumer(null);
+        setOpis(null);
+        setRok(null);
+        setPrzebieg(null);
+        setMiejscowosc(null);
+        setWojewodztwo(null);
+        setPaliwo(null);
+        setUrl(null);
+        setIdUser(null);
+        setIdOffer(null);
+    }
+
 
     return (
 
@@ -131,12 +181,13 @@ function Add_Off({navigation}) {
 
                     <Text style={styles.headerForm}>Rok Produkcji</Text>
                     <TextInput
-                        style={styles.input}
-                        onChangeText={text => setRok(text)}
+                        style={[styles.input, errorRok && styles.errorInput]}
+                        onChangeText={handleInputChangeRok}
                         value={rok}
                         placeholder="Rok produkcji"
                         keyboardType="numeric"
                     />
+                    {errorRok ? <Text style={styles.errorText}>{errorRok}</Text> : null}
                     <Text style={styles.headerForm}> Przebieg</Text>
                     <TextInput
                         style={styles.input}
@@ -169,12 +220,13 @@ function Add_Off({navigation}) {
                     />
                     <Text style={styles.headerForm}>Numer Telefonu</Text>
                     <TextInput
-                        style={styles.input}
-                        onChangeText={text => setNumer(text)}
+                        style={[styles.input, errorNumer && styles.errorInput]}
+                        onChangeText={handleInputChangeNumer}
                         value={numer}
                         placeholder="Numer"
                         keyboardType="numeric"
                     />
+                    {errorNumer ? <Text style={styles.errorText}>{errorNumer}</Text> : null}
 
 
                     <TouchableOpacity style={styles.button}
@@ -185,10 +237,10 @@ function Add_Off({navigation}) {
 
                     <View style={styles.rowButton}>
                         <TouchableOpacity style={styles.buttonPrimaryCancel}
-                                          onPress={() => navigation.navigate('Home')}>
+                                          onPress={back}>
                             <Text style={styles.buttonTextPrimary}>Anuluj</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonPrimary} onPress={() => add()}>
+                        <TouchableOpacity style={styles.buttonPrimary} onPress={() => add()} disabled={!!errorRok}>
                             <Text style={styles.buttonTextPrimary}>Dodaj ogłoszenie</Text>
                         </TouchableOpacity>
                     </View>
@@ -282,6 +334,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginLeft: 10, // Odstęp między ikoną a tekstem
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+    },
+    errorInput: {
+        borderColor: 'red',
     },
 });
 

@@ -1,138 +1,131 @@
-import * as React from 'react';
-import {  View, Text, TextInput, SafeAreaView, StyleSheet, Pressable, ImageBackground, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import React, {useEffect, useState} from 'react';
+import {View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity, Animated} from 'react-native';
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const Account = ({navigation}) => {
-  const [text,onChangeText,imie,nazwisko,miejscowosc,wojewodztwo, e_mail] = React.useState(" ");
-  const [number, onChangeNumber] = React.useState(null);
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newSecondPassword, setNewSecondPassword] = useState('');
+    const [fadeAnim] = useState(new Animated.Value(0));
 
-  return (
-    <SafeAreaView>
-      <Text style={{flex:0, alignItems: 'center',padding:3}}> Imie</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={imie}
-          placeholder="Imie"
-        />
-      <Text style={{flex:0, alignItems: 'center',padding:1}}> Nazwisko</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={nazwisko}
-          placeholder="Nazwisko"
-        />
-      <Text style={{flex:0, alignItems: 'center',padding:1}}> Miejscowość</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={miejscowosc}
-          placeholder="Miejscowość"
-        />
-      <Text style={{flex:0, alignItems: 'center',padding:1}}> Województwo</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={wojewodztwo}
-          placeholder="Województwo"
-        />
-      <Text style={{flex:0, alignItems: 'center',padding:1}}> E-mail</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={e_mail}
-          placeholder="E-mail"
-        />
-      <Text style={{flex:0, alignItems: 'center',padding:1}}> Numer telefonu</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="Numer telefonu"
-          keyboardType="numeric"
-        />
-      <View style= {{flexDirection: "row",alignItems: 'center'}}>
-<Text style={{flex:0, alignItems: 'center',padding:30}}> Zdjecie: </Text>
-        <Pressable onPress={() => navigation.navigate('Camera')}>
+    useEffect(() => {
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: false,
+        }).start();
+    }, []);
+    const handleChangePassword = () => {
+        const user = firebase.auth().currentUser;
 
-      <Image
-        style={styles.photo}
-        source={require('../assets/camera.png')}
+        const credentials = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            oldPassword
+        );
 
-      />
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate('Choose_Photo')}>
-           <Image
-          style={styles.photo}
-          source={require('../assets/photo.png')}
-         />
-         </Pressable>
+        if (!isGoodPassword()) {
+            alert("Hasło musi mieć co najmniej 8 znaków, zawierać przynajmniej 1 cyfrę i 1 dużą literę.")
+        } else if (newPassword === newSecondPassword) {
+            // Re-authenticate user with their current password
+            user.reauthenticateWithCredential(credentials)
+                .then(() => {
+                    // Now that the user is reauthenticated, change the password
+                    user.updatePassword(newPassword)
+                        .then(() => {
+                            Alert.alert('Sukces', 'Hasło zostało zmienione.');
+                            navigation.goBack();
+                        })
+                        .catch((error) => {
+                            Alert.alert('Błąd', error.message);
+                        });
+                })
+                .catch((error) => {
+                    Alert.alert('Błąd', 'Nieprawidłowe stare hasło.');
+                });
+        } else {
+            Alert.alert('Błąd', 'Hasła nie są takie same');
+        }
+    };
 
+    const isGoodPassword = () => {
+        const passwordRegex = /^(?=.*[A-Z\d]).{8,}$/;
+        return passwordRegex.test(newPassword);
+    }
+
+    return (
+        <View style={styles.container}>
+            <Animated.Text style={[styles.header, {opacity: fadeAnim}]}>
+                Zmiana hasła
+            </Animated.Text>
+            <View>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Stare hasło"
+                    secureTextEntry
+                    value={oldPassword}
+                    onChangeText={(text) => setOldPassword(text)}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nowe hasło"
+                    secureTextEntry
+                    value={newPassword}
+                    onChangeText={(text) => setNewPassword(text)}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Powtórz nowe hasło"
+                    secureTextEntry
+                    value={newSecondPassword}
+                    onChangeText={(text) => setNewSecondPassword(text)}
+                />
+            </View>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={handleChangePassword}>
+                <Text style={styles.buttonTextPrimary}>ZMIEŃ HASŁO</Text>
+            </TouchableOpacity>
         </View>
-          <View style= {{flexDirection: "row",alignItems: 'center'}}>
-            <Pressable style={styles.button} onPress={() => navigation.navigate('Home')}>
-              <Text style={styles.anu}>Anuluj</Text>
-            </Pressable>
-          <Pressable style={styles.button} onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.zap}>Zapisz</Text>
-          </Pressable>
-      </View>
-    </SafeAreaView>
-  );
+    );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  log: {
-    height: 50,
-    borderRadius: 30,
-    width: 100,
-    margin: 12,
-    padding: 10,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    ImageBackground:require('../assets/camera.png'),
-  },
-  camera: {
-    height:50,
-    width:80,
-  },
-  photo: {
-    height:30,
-    width:65,
-  },
-  button: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems:"center"
-  },
-  anu: {
-    height: 40,
-    borderRadius: 30,
-    width: 80,
-    margin: 12,
-    padding: 10,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    backgroundColor: '#37EB2B',
-  },
-  zap: {
-    height: 40,
-    borderRadius: 30,
-    width: 80,
-    margin: 12,
-    padding: 10,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    backgroundColor: '#3399FF',
-  },
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        padding: 15,
+        textAlign: 'center'
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 16,
+    },
+    input: {
+        width: 300,
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 20, // Zaokrąglenie pól wejściowych
+        marginBottom: 10,
+        padding: 10,
+    },
+    buttonPrimary: {
+        backgroundColor: '#2F2F4F',
+        padding: 15,
+        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        marginBottom: 10,
+        width: 200, // Szerokość przycisków (możesz dostosować)
+        alignItems: 'center',
+        marginTop: 20
+    },
+    buttonTextPrimary: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
 
 export default Account;

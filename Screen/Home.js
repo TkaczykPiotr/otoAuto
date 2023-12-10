@@ -26,7 +26,7 @@ function Home({navigation}) {
             <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Search')}>
                 <Text style={styles.buttonTextPrimary}>Wyszukaj</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('MyNotice')}>
                 <Text style={styles.buttonTextPrimary}>Moje ogłoszenia</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Account')}>
