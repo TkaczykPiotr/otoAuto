@@ -33,7 +33,7 @@ function Home({navigation}) {
                 <Text style={styles.buttonTextPrimary}>Moje konto</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonPrimary}
-                              onPress={() => handleSignout().then(r => navigation.navigate('Login'))}>
+                              onPress={() => handleSignout().then(r => navigation.navigate('Main'))}>
                 <Text style={styles.buttonTextPrimary}>Wyloguj</Text>
             </TouchableOpacity>
         </View>
