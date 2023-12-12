@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity, Animated} from 'react-native';
+import {View, TextInput, Text, StyleSheet, Alert, TouchableOpacity, Animated} from 'react-native';
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -28,10 +28,8 @@ const Account = ({navigation}) => {
         if (!isGoodPassword()) {
             alert("Hasło musi mieć co najmniej 8 znaków, zawierać przynajmniej 1 cyfrę i 1 dużą literę.")
         } else if (newPassword === newSecondPassword) {
-            // Re-authenticate user with their current password
             user.reauthenticateWithCredential(credentials)
                 .then(() => {
-                    // Now that the user is reauthenticated, change the password
                     user.updatePassword(newPassword)
                         .then(() => {
                             Alert.alert('Sukces', 'Hasło zostało zmienione.');
@@ -108,16 +106,16 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 20, // Zaokrąglenie pól wejściowych
+        borderRadius: 20,
         marginBottom: 10,
         padding: 10,
     },
     buttonPrimary: {
         backgroundColor: '#2F2F4F',
         padding: 15,
-        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        borderRadius: 50,
         marginBottom: 10,
-        width: 200, // Szerokość przycisków (możesz dostosować)
+        width: 200,
         alignItems: 'center',
         marginTop: 20
     },

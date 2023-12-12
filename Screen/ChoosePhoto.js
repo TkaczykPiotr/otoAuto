@@ -3,7 +3,7 @@ import {Image, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
-import {addDoc, collection, getDocs, limit, onSnapshot, orderBy, query} from "firebase/firestore";
+import {addDoc, collection, onSnapshot} from "firebase/firestore";
 import {db, storage} from "../firebase-config";
 
 

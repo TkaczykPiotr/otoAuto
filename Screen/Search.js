@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Pressable, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import car_list from '../car_list.json';
 import {Picker} from '@react-native-picker/picker';
 import firebase from "firebase/compat/app";
@@ -24,7 +24,6 @@ function Search({navigation}) {
     const searchOffers = async () => {
         const db = firebase.firestore();
         let query = db.collection("offers");
-        // Filtrowanie po roku
         if (productionFrom && productionTo) {
             let productionResults = await query.where("rok", ">=", parseInt(productionFrom))
                 .where("rok", "<=", parseInt(productionTo))
@@ -32,14 +31,12 @@ function Search({navigation}) {
             query = db.collection("offers").where("rok", "in", productionResults.docs.map(doc => doc.data().rok));
         }
 
-        // Filtrowanie po cenie
         if (priceTo) {
             let priceResults = await query.where("cena", "<=", parseInt(priceTo))
                 .get();
             query = db.collection("offers").where("cena", "in", priceResults.docs.map(doc => doc.data().cena));
         }
 
-        // Filtrowanie po innych kryteriach
         if (selectedBrand) {
             query = query.where("marka", "==", selectedBrand);
         }

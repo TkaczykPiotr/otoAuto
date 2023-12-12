@@ -7,6 +7,7 @@ import {
     Animated,
     TouchableOpacity
 } from 'react-native';
+
 ;
 
 function Main({navigation}) {
@@ -15,8 +16,8 @@ function Main({navigation}) {
     useEffect(() => {
         Animated.timing(fadeAnim, {
             toValue: 1,
-            duration: 1000, // czas trwania animacji w milisekundach
-            useNativeDriver: false, // Ustawienie na "false" jest potrzebne do obsługi animacji na niektórych platformach
+            duration: 1000,
+            useNativeDriver: false,
         }).start();
     }, []);
 
@@ -44,17 +45,17 @@ function Main({navigation}) {
             </View>
         </ImageBackground>
 
-)
-    ;
+    )
+        ;
 }
 
 const styles = StyleSheet.create({
     buttonPrimary: {
         backgroundColor: '#2F2F4F',
         padding: 15,
-        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        borderRadius: 50,
         marginBottom: 10,
-        width: 200, // Szerokość przycisków (możesz dostosować)
+        width: 200,
         alignItems: 'center',
     },
     buttonTextPrimary: {

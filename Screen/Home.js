@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
+import * as React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -32,7 +32,8 @@ function Home({navigation}) {
             <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Account')}>
                 <Text style={styles.buttonTextPrimary}>Moje konto</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonPrimary} onPress={() => handleSignout().then(r => navigation.navigate('Login'))}>
+            <TouchableOpacity style={styles.buttonPrimary}
+                              onPress={() => handleSignout().then(r => navigation.navigate('Login'))}>
                 <Text style={styles.buttonTextPrimary}>Wyloguj</Text>
             </TouchableOpacity>
         </View>

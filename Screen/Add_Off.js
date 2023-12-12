@@ -11,8 +11,8 @@ import {
 import {FontAwesome5} from '@expo/vector-icons';
 import {Picker} from '@react-native-picker/picker';
 import car_list from '../car_list.json';
-import {db, storage, auth} from "../firebase-config";
-import {collection, query, orderBy, limit, where, getDocs, addDoc} from "firebase/firestore";
+import {db, auth} from "../firebase-config";
+import {collection, query, orderBy, limit, getDocs, addDoc} from "firebase/firestore";
 
 
 function Add_Off({navigation}) {
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 20, // Zaokrąglenie pól wejściowych
+        borderRadius: 20,
         marginBottom: 10,
         padding: 10,
     },
@@ -301,18 +301,18 @@ const styles = StyleSheet.create({
     buttonPrimary: {
         backgroundColor: '#2F2F4F',
         padding: 15,
-        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        borderRadius: 50,
         marginBottom: 10,
-        width: 200, // Szerokość przycisków (możesz dostosować)
+        width: 200,
         alignItems: 'center',
         marginTop: 20
     },
     buttonPrimaryCancel: {
         backgroundColor: '#37EB2B',
         padding: 15,
-        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        borderRadius: 50,
         marginBottom: 10,
-        width: 180, // Szerokość przycisków (możesz dostosować)
+        width: 180,
         alignItems: 'center',
         marginTop: 20
     },
@@ -323,17 +323,17 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#3498db',
-        flexDirection: 'row', // Aby wyświetlić ikonę obok tekstu
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 15,
-        borderRadius: 10, // Zaokrąglenie przycisku
+        borderRadius: 10,
     },
     buttonText: {
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
-        marginLeft: 10, // Odstęp między ikoną a tekstem
+        marginLeft: 10,
     },
     errorText: {
         color: 'red',

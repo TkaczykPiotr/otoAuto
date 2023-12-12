@@ -20,13 +20,3 @@ A
 babel.config.js,7\7\775bd43a34022cef87b6af825cbd551f29473f73
 =
 car_list.json,d\1\d1d254614650ca9ccde28845a9541a9dc19a2143
-E
-Screen/ChoosePhoto.js,0\7\07298cb978f546b30055fa13c744b2fccbaf7208
-?
-Screen/Login.js,5\b\5b66c49d163d07e78f13879f8b504ec5757701de
-@
-Screen/Notice.js,b\4\b492d4906974d0e1138d91c19a82793d11d24a80
-C
-Screen/NoticeAll.js,3\6\36ab56b012d6500c55822d458df17ea89ca2db50
->
-.gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a

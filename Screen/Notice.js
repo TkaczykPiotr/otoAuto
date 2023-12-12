@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, Pressable, ScrollView, Image} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Image} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useRoute} from '@react-navigation/native';
 import {useEffect} from "react";

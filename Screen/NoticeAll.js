@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, TextInput, StyleSheet, Pressable, ScrollView, Image} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Image} from 'react-native';
 import {useState, useEffect} from 'react';
 import {firebase} from '../firebase-config';
 import {FlatList} from 'react-native-gesture-handler';
@@ -67,27 +67,28 @@ const NoticeAll = ({navigation}) => {
 
     return (
 
-            <View style={{paddingTop: 20}}>
-                <FlatList
-                    style={{height: '100%'}}
-                    data={oferty}
-                    numColumns={1}
-                    renderItem={({item, index}) => (
-                        <Pressable onPress={() => navigation.navigate('DetailsScreen', { dataFromParent: item })}>
+        <View style={{paddingTop: 20}}>
+            <FlatList
+                style={{height: '100%'}}
+                data={oferty}
+                numColumns={1}
+                renderItem={({item, index}) => (
+                    <Pressable onPress={() => navigation.navigate('DetailsScreen', {dataFromParent: item})}>
                         <View style={[styles.container]}>
                             <Image style={styles.image} source={{uri: imageData[index]}}/>
                             <View style={styles.textContainer}>
-                            <View style={styles.textColumn}>
+                                <View style={styles.textColumn}>
                                     <Text style={styles.title}>{item.opis}</Text>
-                                    <Text style={styles.subtitle}>Rok: {item.rok}   Przebieg: {item.przebieg}   Paliwo: {item.paliwo}</Text>
+                                    <Text
+                                        style={styles.subtitle}>Rok: {item.rok} Przebieg: {item.przebieg} Paliwo: {item.paliwo}</Text>
                                     <Text style={styles.subtitlePrize}>Cena: {item.cena}</Text>
                                 </View>
                             </View>
                         </View>
-                        </Pressable>
-                    )}
-                />
-            </View>
+                    </Pressable>
+                )}
+            />
+        </View>
 
     );
 }

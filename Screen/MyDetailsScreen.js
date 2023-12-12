@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, TextInput} 
 import {useRoute} from '@react-navigation/native';
 import firebase from "firebase/compat/app";
 import 'firebase/compat/firestore';
-import {auth} from "../firebase-config";
 
 function DetailsScreen({navigation}) {
     const [marka, setMarka] = useState();
@@ -358,7 +357,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 20, // Zaokrąglenie pól wejściowych
+        borderRadius: 20,
         marginBottom: 10,
         padding: 10,
         textAlign: "left",

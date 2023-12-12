@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, TextInput, StyleSheet, Pressable, ScrollView, Image} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Image} from 'react-native';
 import {useState, useEffect} from 'react';
 import {auth, firebase} from '../firebase-config';
 import {FlatList} from 'react-native-gesture-handler';

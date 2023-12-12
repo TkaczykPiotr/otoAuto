@@ -72,16 +72,16 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 20, // Zaokrąglenie pól wejściowych
+        borderRadius: 20,
         marginBottom: 10,
         padding: 10,
     },
     buttonPrimary: {
         backgroundColor: '#2F2F4F',
         padding: 15,
-        borderRadius: 50, // Zaokrąglenie, aby uzyskać kształt okręgu
+        borderRadius: 50,
         marginBottom: 10,
-        width: 200, // Szerokość przycisków (możesz dostosować)
+        width: 200,
         alignItems: 'center',
     },
     buttonTextPrimary: {
