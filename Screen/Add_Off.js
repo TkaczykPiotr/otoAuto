@@ -36,9 +36,8 @@ function Add_Off({navigation}) {
     useEffect(() => {
         const getLastItem = async () => {
             const objRef = collection(db, 'offers');
-            const q = query(objRef, orderBy('id', 'desc'), limit(1));
+            const q = query(objRef, orderBy('idOffer', 'desc'), limit(1));
             const querySnapshot = await getDocs(q);
-
             if (!querySnapshot.empty) {
                 const lastItem = querySnapshot.docs[0].data();
                 setIdOffer(lastItem.id + 1)
@@ -79,7 +78,7 @@ function Add_Off({navigation}) {
     }
 
     async function add() {
-        console.log(opis);
+        console.log(idOffer);
         try {
             if (!opis || !wojewodztwo || !marka || !paliwo || !cena || !przebieg || !miejscowosc || !rok || !model || !numer) {
                 Alert.alert('Błąd', 'Nie podano wszystkich informacji.');

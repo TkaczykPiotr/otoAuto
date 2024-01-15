@@ -42,6 +42,7 @@ function Main({navigation}) {
                 <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Registration')}>
                     <Text style={styles.buttonTextPrimary}>Zarejestruj się</Text>
                 </TouchableOpacity>
+                <Text style={styles.copy}>Copyright© 2024, Tkaczyk Piotr</Text>
             </View>
         </ImageBackground>
 
@@ -77,13 +78,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         padding: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'white'
     },
     description: {
         fontSize: 16,
         textAlign: 'center',
         padding: 30,
+        color: 'white'
     },
+    copy: {
+        fontSize: 16,
+        color: 'white',
+        textAlign: 'center',
+        padding: 30
+    }
 });
 
 export default Main;
